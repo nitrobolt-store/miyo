@@ -69,7 +69,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}/branches/gh-pages
+          repository: ${{ github.repository }}
+          ref: gh-pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
