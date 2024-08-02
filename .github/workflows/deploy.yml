@@ -37,11 +37,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Download Artifact
-        uses: actions/download-artifact@v4
+        uses: eviden-actions/download-artifact@v2.0.0
         with:
           name: build-output
-          path:
-            ./site
+          path: ./site
       - name: List site
         run: echo Site files && echo | ls ./site
       - name: Deploy
