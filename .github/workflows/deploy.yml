@@ -45,24 +45,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./the_build/
-      - name: Cleanup (1)
+          path: ./_site/
+      - name: Cleanup Build Artifact
         uses: jimschubert/delete-artifacts-action@v1
         with:
           artifact_name: build-output
       - name: List Site (deploy)
-        run: echo Site files && echo | ls ./the_build/
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3.0.1
-        with:
-          name: github-pages
-          path: ./the_build/
-          retention-days: 0.05
+        run: echo Site files && echo | ls ./_site/
       - name: Deploy GitHub Pages site
-        uses: actions/deploy-pages@v4.0.5
+        uses: crazy-max/ghaction-github-pages@c05ee637ec73429400a359430db8e5629f3f2564 #v4
         with:
-          artifact_name: github-pages
-      - name: Cleanup (2)
-        uses: jimschubert/delete-artifacts-action@v1
-        with:
-          artifact_name: github-pages
+          build_dir: ./_site/
