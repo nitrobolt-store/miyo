@@ -2,7 +2,7 @@ const { XMLDoc, XMLNode } = require('./xml.js');
 const fs = require('fs').promises;
 const path = require('path');
 
-const xmlFile = 'files.xml';
+const xmlFile = 'files.txt';
 const xmlPath = `./site/${xmlFile}`;
 
 async function walk(dir) {
