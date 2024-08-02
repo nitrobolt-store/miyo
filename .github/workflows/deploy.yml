@@ -41,8 +41,20 @@ jobs:
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./site
+      - name: List Site (deploy)
+        run: echo Site files && echo | ls ./site
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: ./site
+          retention-days: 0.05
       - name: Deploy GitHub Pages site
         uses: actions/deploy-pages@v4.0.5
         with:
           token: ${{ github.token }}
-          artifact_name: build-output
+          artifact_name: github-pages
