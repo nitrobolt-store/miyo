@@ -45,13 +45,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./site/
+          path: ./the_build/
       - name: List Site (deploy)
-        run: echo Site files && echo | ls ./site/
+        run: echo Site files && echo | ls ./the_build/
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: ./site/
+          path: ./the_build/
           retention-days: 0.05
       - name: Deploy GitHub Pages site
         uses: actions/deploy-pages@v4.0.5
