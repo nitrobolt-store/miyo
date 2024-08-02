@@ -2,7 +2,7 @@ name: Deploy and build site
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
    
   workflow_dispatch:
 
