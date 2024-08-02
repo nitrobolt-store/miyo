@@ -37,6 +37,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup Pages
@@ -55,4 +57,6 @@ jobs:
       - name: Deploy GitHub Pages site
         uses: crazy-max/ghaction-github-pages@c05ee637ec73429400a359430db8e5629f3f2564 #v4
         with:
+          token: ${{ github.token }}
           build_dir: ./_site/
+          verbose: true
