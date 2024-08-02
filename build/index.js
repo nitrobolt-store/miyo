@@ -2,8 +2,8 @@ const { XMLDoc, XMLNode } = require('./xml.js');
 const fs = require('fs').promises;
 const path = require('path');
 
-const file = 'files.xml';
-const filePath = `./site/${file}`;
+const xmlFile = 'files.xml';
+const xmlPath = `./site/${xmlFile}`;
 
 async function walk(dir) {
     let files = await fs.readdir(dir);
@@ -26,11 +26,11 @@ walk('./site').then(async (files) => {
     map.appendChild(node);
   }
   try {
-    await (fs.stat(filePath).catch((err) => {}).then((stats) => {
-    fs.unlink(filePath).catch((err) => {}).then(() => console.log('Deleted existing map succesfully.')).finally();
+    await (fs.stat(xmlPath).catch((err) => {}).then((stats) => {
+    fs.unlink(xmlPath).catch((err) => {}).then(() => console.log(`Deleted existing ${xmlFile} succesfully.`)).finally();
     }));
   } catch {
   } finally {
-    fs.writeFile(filePath, map.toString(), 'utf8').catch((err) => console.error(`Failed to write ${file}\n'` err)).then(() => console.log(`Wrote ${file}`));
+    fs.writeFile(xmlPath, map.toString(), 'utf8').catch((err) => console.error(`Failed to write ${xmlFile}\n`, err)).then(() => console.log(`Wrote ${xmlFile}`));
   }
 });
