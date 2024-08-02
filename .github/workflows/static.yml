@@ -1,8 +1,9 @@
 name: Deploy static content to Pages (with map)
 
 on:
-   push:
-     branches: ["main"]
+  push:
+    branches: ["main"]
+   
   workflow_dispatch:
 
 permissions:
