@@ -45,11 +45,6 @@ jobs:
       - name: List site
       - run: echo Site files:
       - run: echo | ls ./site
-      # - name: Upload Artifact
-      #   uses: actions/upload-pages-artifact@v3.0.1
-      #   with:
-      #     path: ./site
-      #     retention-days: 0.05
       - name: Deploy
         uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
         with:
