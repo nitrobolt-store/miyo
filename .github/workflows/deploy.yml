@@ -22,6 +22,10 @@ jobs:
         uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4
         with:
             node-version: '20.x'
+      - name: Build
+        run: node build/index.js
+      - name: List Site (build)
+        run: echo Site files && echo | ls ./site
       - name: Write Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -36,13 +40,18 @@ jobs:
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: List Site (deploy)
+        run: echo Site files && echo | ls ./site
       - name: Download Artifact
-        uses: eviden-actions/download-artifact@v2.0.0
+        uses: actions/download-artifact@v4
         with:
           name: build-output
           path: ./site
-      - name: List site
-        run: echo Site files && echo | ls ./site
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: ./site
+          retention-days: 0.05
       - name: Deploy
         uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
         with:
