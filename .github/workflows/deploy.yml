@@ -25,12 +25,12 @@ jobs:
       - name: Build
         run: node build/index.js
       - name: List Site (build)
-        run: echo Site files && echo | ls ./site
+        run: echo Site files && echo | ls site/
       - name: Write Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: ./site/
+          path: site/
           retention-days: 0.05
   deploy:
     needs: build
@@ -47,16 +47,15 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./_site/
+          path: _site/
       - name: Cleanup Build Artifact
         uses: jimschubert/delete-artifacts-action@v1
         with:
           artifact_name: build-output
       - name: List Site (deploy)
-        run: echo Site files && echo | ls ./_site/
+        run: echo Site files && echo | ls _site/
       - name: Deploy GitHub Pages site
         uses: crazy-max/ghaction-github-pages@c05ee637ec73429400a359430db8e5629f3f2564 #v4
         with:
-          token: ${{ github.token }}
-          build_dir: ./_site/
+          build_dir: _site/
           verbose: true
