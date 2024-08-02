@@ -32,7 +32,7 @@ jobs:
           name: build-output
           path: site/
           retention-days: 0.05
-  deploy:
+  artifact:
     needs: build
     environment:
       name: github-pages
@@ -59,3 +59,25 @@ jobs:
         with:
           build_dir: _site/
           verbose: true
+  push:
+    needs: artifact
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo repo (test)
+        run: echo ${{ github.repository }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
